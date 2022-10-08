@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">StreetArt</string>
+    <string name="app_name">Street Art</string>
+    <string name="button_addPlacemark">Add Placemark</string>
+    <string name="hint_placemarkTitle">Street Art Title</string>
+    <string name="hint_placemarkDescription">Description </string>
+    <string name="menu_addPlacemark">Add</string>
+    <string name="menu_cancelPlacemark">Cancel</string>
 </resources>

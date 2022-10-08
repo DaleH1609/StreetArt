@@ -4,6 +4,7 @@
     package="org.wit.streetart">
 
     <application
+        android:name=".main.MainApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,14 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StreetArt"
         tools:targetApi="31">
-        <activity
-            android:name=".StreetArt"
+        <activity android:name=".activities.StreetArtListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.StreetArtActivity">
         </activity>
     </application>
 
