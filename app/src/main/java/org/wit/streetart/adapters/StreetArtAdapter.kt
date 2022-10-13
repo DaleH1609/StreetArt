@@ -3,6 +3,7 @@ package org.wit.streetart.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.wit.streetart.databinding.CardPlacemarkBinding
 import org.wit.streetart.models.StreetArtModel
 
@@ -33,6 +34,7 @@ class StreetArtAdapter constructor(private var streetarts: List<StreetArtModel>,
         fun bind(streetart: StreetArtModel, listener: StreetArtListener) {
             binding.streetArtTitle.text = streetart.title
             binding.description.text = streetart.description
+            Picasso.get().load(streetart.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onStreetArtClick(streetart) }
         }
     } }

@@ -6,23 +6,29 @@
     <application
         android:name=".main.MainApp"
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.StreetArt"
-        tools:targetApi="31">
-        <activity android:name=".activities.StreetArtListActivity"
+        android:theme="@style/Theme.StreetArt">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
+        <activity
+            android:name=".activities.MapActivity"
+            android:exported="true"
+            android:label="@string/title_activity_map" />
+        <activity
+            android:name=".activities.StreetArtListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.StreetArtActivity">
-        </activity>
+        <activity android:name=".activities.StreetArtActivity" />
     </application>
-
 </manifest>
