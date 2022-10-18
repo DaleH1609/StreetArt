@@ -23,9 +23,7 @@ class StreetArtMemStore : StreetArtStore {
     }
 
     override fun delete(streetart: StreetArtModel) {
-        streetart.id
         streetarts.remove(streetart)
-        logAll()
     }
 
     fun logAll() {
@@ -38,6 +36,9 @@ class StreetArtMemStore : StreetArtStore {
             foundStreetArt.title = streetart.title
             foundStreetArt.description = streetart.description
             foundStreetArt.image = streetart.image
+            foundStreetArt.lat = streetart.lat
+            foundStreetArt.lng = streetart.lng
+            foundStreetArt.zoom = streetart.zoom
             logAll()
         }
     }

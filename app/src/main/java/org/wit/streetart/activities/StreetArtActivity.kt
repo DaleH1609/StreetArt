@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
@@ -24,7 +25,7 @@ private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 class StreetArtActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStreetartBinding
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
-    var location = Location(52.245696, -7.139102, 15f)
+   // var location = Location(52.245696, -7.139102, 15f)
     var streetArt = StreetArtModel()
     lateinit var app : MainApp
 
@@ -82,6 +83,12 @@ class StreetArtActivity : AppCompatActivity() {
             showImagePicker(imageIntentLauncher)
         }
         binding.placemarkLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (streetArt.zoom != 0f) {
+                location.lat =  streetArt.lat
+                location.lng = streetArt.lng
+                location.zoom = streetArt.zoom
+            }
             val launcherIntent = Intent(this, MapActivity::class.java)
                 .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
@@ -97,6 +104,10 @@ class StreetArtActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.item_delete -> {
+                app.streetArts.delete(streetArt)
+                finish()
+            }
             R.id.item_cancel -> {
                 finish()
             }
@@ -132,8 +143,11 @@ class StreetArtActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            location = result.data!!.extras?.getParcelable("location")!!
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
+                            streetArt.lat = location.lat
+                            streetArt.lng = location.lng
+                            streetArt.zoom = location.zoom
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }

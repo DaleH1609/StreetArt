@@ -14,6 +14,7 @@ import org.wit.streetart.adapters.StreetArtListener
 import org.wit.streetart.databinding.ActivityStreetArtListBinding
 import org.wit.streetart.main.MainApp
 import org.wit.streetart.models.StreetArtModel
+import org.wit.streetart.models.StreetArtStore
 
 
 class StreetArtListActivity : AppCompatActivity(), StreetArtListener {
@@ -28,11 +29,12 @@ class StreetArtListActivity : AppCompatActivity(), StreetArtListener {
         binding.toolbar.title = title
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+
         app = application as MainApp
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = StreetArtAdapter(app.streetArts.findAll(), this)
+        loadPlacemarks()
 
         registerRefreshCallback()
     }
@@ -42,10 +44,19 @@ class StreetArtListActivity : AppCompatActivity(), StreetArtListener {
         return super.onCreateOptionsMenu(menu)
     }
 
+    private fun loadPlacemarks() {
+        showStreetArts(app.streetArts.findAll())
+    }
+
+    fun showStreetArts (streetarts: List<StreetArtModel>) {
+        binding.recyclerView.adapter = StreetArtAdapter(streetarts, this)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+    }
+
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { binding.recyclerView.adapter?.notifyDataSetChanged() }
+            { loadPlacemarks() }
     }
 
 
