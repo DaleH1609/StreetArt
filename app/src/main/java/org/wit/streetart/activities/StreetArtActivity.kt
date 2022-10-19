@@ -56,6 +56,7 @@ class StreetArtActivity : AppCompatActivity() {
             streetArt = intent.extras?.getParcelable("streetart_edit")!!
             binding.streetArtTitle.setText(streetArt.title)
             binding.description.setText(streetArt.description)
+            binding.artistName.setText(streetArt.artistName)
                 Picasso.get()
                 .load(streetArt.image)
                 .into(binding.placemarkImage)
@@ -68,6 +69,7 @@ class StreetArtActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             streetArt.title = binding.streetArtTitle.text.toString()
             streetArt.description = binding.description.text.toString()
+            streetArt.artistName = binding.artistName.text.toString()
 
             if (streetArt.title.isEmpty()) {
                 Snackbar.make(it,R.string.enter_placemark_title, Snackbar.LENGTH_LONG)

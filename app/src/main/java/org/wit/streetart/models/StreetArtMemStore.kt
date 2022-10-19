@@ -35,6 +35,7 @@ class StreetArtMemStore : StreetArtStore {
         if (foundStreetArt != null) {
             foundStreetArt.title = streetart.title
             foundStreetArt.description = streetart.description
+            foundStreetArt.artistName = streetart.artistName
             foundStreetArt.image = streetart.image
             foundStreetArt.lat = streetart.lat
             foundStreetArt.lng = streetart.lng

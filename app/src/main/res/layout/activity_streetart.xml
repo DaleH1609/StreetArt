@@ -56,6 +56,22 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
+                <EditText
+                    android:id="@+id/artistName"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_margin="8dp"
+                    android:autofillHints=""
+                    android:fontFamily="@font/alfa_slab_one"
+                    android:hint="@string/hint_artistTitle"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+
+                    android:padding="8dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
 
                 <EditText
                     android:id="@+id/description"
@@ -122,6 +138,7 @@
                     android:fontFamily="@font/alfa_slab_one"
                     android:text="Rate"
                     android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.044"

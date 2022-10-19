@@ -13,7 +13,6 @@
     <string name="change_placemark_image">Change placemark image</string>
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">Map</string>
-    <string name="favourites_yes">Yes</string>
-    <string name="favourites_no">No</string>
+    <string name="hint_artistTitle">Artist Name</string>
     <string name="fav_subtitle">Add to favourites?</string>
 </resources>

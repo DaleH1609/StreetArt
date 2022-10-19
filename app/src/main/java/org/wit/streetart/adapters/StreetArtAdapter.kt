@@ -34,6 +34,7 @@ class StreetArtAdapter constructor(private var streetarts: List<StreetArtModel>,
         fun bind(streetart: StreetArtModel, listener: StreetArtListener) {
             binding.streetArtTitle.text = streetart.title
             binding.description.text = streetart.description
+            binding.artistName.text = streetart.artistName
             Picasso.get().load(streetart.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onStreetArtClick(streetart) }
         }
