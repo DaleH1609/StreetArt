@@ -8,6 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class StreetArtModel(var id: Long = 0,
                           var title: String = "",
                           var description: String = "",
+                          var rating: Int = 0,
                           var image: Uri = Uri.EMPTY,
                           var lat : Double = 0.0,
                           var lng: Double = 0.0,

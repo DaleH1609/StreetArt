@@ -5,10 +5,12 @@
     <item
         android:id="@+id/item_cancel"
         android:title="@string/menu_cancelPlacemark"
+        android:fontFamily="@font/alfa_slab_one"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/item_delete"
         android:title="@string/menu_deletePlacemark"
+        android:fontFamily="@font/alfa_slab_one"
         app:showAsAction="always"/>
 </menu>

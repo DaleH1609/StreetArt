@@ -38,7 +38,10 @@ class StreetArtActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
+        binding.amountPicker.minValue = 1
+        binding.amountPicker.maxValue = 5
         app = application as MainApp
+
 
         binding.placemarkLocation.setOnClickListener {
             val location = Location(52.245696, -7.139102, 15f)
@@ -65,6 +68,7 @@ class StreetArtActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             streetArt.title = binding.streetArtTitle.text.toString()
             streetArt.description = binding.description.text.toString()
+
             if (streetArt.title.isEmpty()) {
                 Snackbar.make(it,R.string.enter_placemark_title, Snackbar.LENGTH_LONG)
                     .show()
