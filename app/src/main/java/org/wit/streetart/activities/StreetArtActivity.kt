@@ -7,6 +7,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.RatingBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
@@ -25,7 +29,6 @@ private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 class StreetArtActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStreetartBinding
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
-   // var location = Location(52.245696, -7.139102, 15f)
     var streetArt = StreetArtModel()
     lateinit var app : MainApp
 
@@ -38,10 +41,7 @@ class StreetArtActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
-        binding.amountPicker.minValue = 1
-        binding.amountPicker.maxValue = 5
         app = application as MainApp
-
 
         binding.placemarkLocation.setOnClickListener {
             val location = Location(52.245696, -7.139102, 15f)
@@ -57,6 +57,7 @@ class StreetArtActivity : AppCompatActivity() {
             binding.streetArtTitle.setText(streetArt.title)
             binding.description.setText(streetArt.description)
             binding.artistName.setText(streetArt.artistName)
+            binding.ratingBar.setRating(streetArt.rating.toFloat())
                 Picasso.get()
                 .load(streetArt.image)
                 .into(binding.placemarkImage)
@@ -70,7 +71,7 @@ class StreetArtActivity : AppCompatActivity() {
             streetArt.title = binding.streetArtTitle.text.toString()
             streetArt.description = binding.description.text.toString()
             streetArt.artistName = binding.artistName.text.toString()
-
+            streetArt.rating = binding.ratingBar.rating.toString()
             if (streetArt.title.isEmpty()) {
                 Snackbar.make(it,R.string.enter_placemark_title, Snackbar.LENGTH_LONG)
                     .show()
@@ -88,6 +89,7 @@ class StreetArtActivity : AppCompatActivity() {
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
+
         binding.placemarkLocation.setOnClickListener {
             val location = Location(52.245696, -7.139102, 15f)
             if (streetArt.zoom != 0f) {
