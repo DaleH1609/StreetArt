@@ -22,6 +22,7 @@ class StreetArtListActivity : AppCompatActivity(), StreetArtListener {
     lateinit var app: MainApp
     private lateinit var binding: ActivityStreetArtListBinding
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +36,7 @@ class StreetArtListActivity : AppCompatActivity(), StreetArtListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         loadPlacemarks()
-
+        registerMapCallback()
         registerRefreshCallback()
     }
 
@@ -59,15 +60,25 @@ class StreetArtListActivity : AppCompatActivity(), StreetArtListener {
             { loadPlacemarks() }
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, StreetArtActivity::class.java)
                 refreshIntentLauncher.launch(launcherIntent)
             }
+                R.id.item_map -> {
+                    val launcherIntent = Intent(this, PlacemarkMapsActivity::class.java)
+                    mapIntentLauncher.launch(launcherIntent)
+                }
+            }
+            return super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
+
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            {  }
     }
 
     override fun onStreetArtClick(streetart: StreetArtModel) {
@@ -81,5 +92,3 @@ class StreetArtListActivity : AppCompatActivity(), StreetArtListener {
         super.onActivityResult(requestCode, resultCode, data)
     }
 }
-
-

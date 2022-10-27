@@ -15,4 +15,7 @@
     <string name="title_activity_map">Map</string>
     <string name="hint_artistTitle">Artist Name</string>
     <string name="submit_rating">Submit Rating</string>
+    <string name="placemark_image_placeholder">Placemark Imagee</string>
+    <string name="placemark_title_placeholder">Placemark Title</string>
+    <string name="placemark_description_placeholder">Placemark Description</string>
 </resources>

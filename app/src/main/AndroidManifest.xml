@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.wit.streetart">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:name=".main.MainApp"
         android:allowBackup="true"
@@ -34,9 +37,11 @@
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.StreetArtActivity" />
+        <activity android:name=".activities.PlacemarkMapsActivity" />
     </application>
 </manifest>

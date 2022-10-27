@@ -11,7 +11,10 @@ interface StreetArtListener {
     fun onStreetArtClick(streetart: StreetArtModel)
 }
 
-class StreetArtAdapter constructor(private var streetarts: List<StreetArtModel>, private val listener: StreetArtListener) :
+class StreetArtAdapter constructor(
+    private var streetarts: List<StreetArtModel>,
+    private val listener: StreetArtListener
+    ) :
     RecyclerView.Adapter<StreetArtAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
