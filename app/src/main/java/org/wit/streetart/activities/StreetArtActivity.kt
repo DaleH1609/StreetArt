@@ -4,12 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.RatingBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -72,7 +68,7 @@ class StreetArtActivity : AppCompatActivity() {
             streetArt.description = binding.description.text.toString()
             streetArt.artistName = binding.artistName.text.toString()
             streetArt.rating = binding.ratingBar.rating.toString()
-            if (streetArt.title.isEmpty()) {
+            if (streetArt.title.isEmpty() && streetArt.description.isEmpty()) {
                 Snackbar.make(it,R.string.enter_placemark_title, Snackbar.LENGTH_LONG)
                     .show()
             } else {
