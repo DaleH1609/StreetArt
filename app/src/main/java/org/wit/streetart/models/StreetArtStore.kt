@@ -5,4 +5,5 @@ interface StreetArtStore {
     fun create(streetart: StreetArtModel)
     fun update(streetart: StreetArtModel)
     fun delete(streetart: StreetArtModel)
+    fun findById(id:Long) : StreetArtModel?
 }

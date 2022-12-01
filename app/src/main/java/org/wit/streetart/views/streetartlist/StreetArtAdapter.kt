@@ -1,4 +1,4 @@
-package org.wit.streetart.adapters
+package org.wit.streetart.views.streetartlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -22,6 +22,11 @@ class StreetArtMemStore : StreetArtStore {
         logAll()
     }
 
+    override fun findById(id:Long) : StreetArtModel? {
+        val foundPlacemark: StreetArtModel? = streetarts.find { it.id == id }
+        return foundPlacemark
+    }
+
     override fun delete(streetart: StreetArtModel) {
         streetarts.remove(streetart)
     }

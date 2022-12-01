@@ -34,6 +34,11 @@ class StreetArtJSONStore(private val context: Context) : StreetArtStore {
         return streetArts
     }
 
+    override fun findById(id:Long) : StreetArtModel? {
+        val foundPlacemark: StreetArtModel? = streetArts.find { it.id == id }
+        return foundPlacemark
+    }
+
     override fun create(streetart: StreetArtModel) {
         streetart.id = generateRandomId()
         streetArts.add(streetart)
@@ -47,7 +52,6 @@ class StreetArtJSONStore(private val context: Context) : StreetArtStore {
             foundStreetArt.title = streetart.title
             foundStreetArt.description = streetart.description
             foundStreetArt.artistName = streetart.artistName
-            foundStreetArt.rating = streetart.rating
             foundStreetArt.image = streetart.image
             foundStreetArt.lat = streetart.lat
             foundStreetArt.lng = streetart.lng
