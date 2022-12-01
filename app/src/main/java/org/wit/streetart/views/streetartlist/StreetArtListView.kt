@@ -5,6 +5,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.streetart.R
 import org.wit.streetart.adapters.StreetArtAdapter
 import org.wit.streetart.adapters.StreetArtListener
@@ -28,12 +31,9 @@ class StreetArtListView :  AppCompatActivity(), StreetArtListener {
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
         presenter = StreetArtListPresenter(this)
-        //app = application as MainApp
-
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter =
-            StreetArtAdapter(presenter.getPlacemarks(), this)
+        updateRecyclerView()
 
     }
 
@@ -59,5 +59,12 @@ class StreetArtListView :  AppCompatActivity(), StreetArtListener {
 
     override fun onStreetArtClick(streetart: StreetArtModel) {
         presenter.doEditPlacemark(streetart)
+    }
+
+    private fun updateRecyclerView(){
+        GlobalScope.launch(Dispatchers.Main){
+            binding.recyclerView.adapter =
+                StreetArtAdapter(presenter.getPlacemarks(), this@StreetArtListView)
+        }
     }
 }

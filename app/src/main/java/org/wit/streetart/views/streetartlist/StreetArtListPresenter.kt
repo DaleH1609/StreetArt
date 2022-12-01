@@ -3,6 +3,9 @@ package org.wit.streetart.views.streetartlist
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.streetart.main.MainApp
 import org.wit.streetart.models.StreetArtModel
 import org.wit.streetart.views.map.PlacemarkMapView
@@ -20,7 +23,7 @@ class StreetArtListPresenter(val view: StreetArtListView) {
         registerRefreshCallback()
     }
 
-    fun getPlacemarks() = app.streetArts.findAll()
+   suspend fun getPlacemarks() = app.streetArts.findAll()
 
     fun doAddPlacemark() {
         val launcherIntent = Intent(view, StreetArtView::class.java)
@@ -40,7 +43,11 @@ class StreetArtListPresenter(val view: StreetArtListView) {
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { getPlacemarks() }
+            {
+                GlobalScope.launch(Dispatchers.Main){
+                    getPlacemarks()
+                }
+            }
     }
     private fun registerEditCallback() {
         editIntentLauncher =

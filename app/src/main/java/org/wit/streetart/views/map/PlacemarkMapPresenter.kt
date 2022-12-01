@@ -15,7 +15,7 @@ class PlacemarkMapPresenter(val view: PlacemarkMapView) {
     app = view.application as MainApp
   }
 
-  fun doPopulateMap(map: GoogleMap) {
+  suspend fun doPopulateMap(map: GoogleMap) {
     map.uiSettings.setZoomControlsEnabled(true)
     map.setOnMarkerClickListener(view)
     app.streetArts.findAll().forEach {
@@ -26,7 +26,7 @@ class PlacemarkMapPresenter(val view: PlacemarkMapView) {
     }
   }
 
-  fun doMarkerSelected(marker: Marker) {
+  suspend fun doMarkerSelected(marker: Marker) {
     val tag = marker.tag as Long
     val streetart = app.streetArts.findById(tag)
     if (streetart != null) view.showPlacemark(streetart)

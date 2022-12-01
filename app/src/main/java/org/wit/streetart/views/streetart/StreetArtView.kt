@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.streetart.R
 import org.wit.streetart.databinding.ActivityStreetartBinding
 import org.wit.streetart.models.StreetArtModel
@@ -68,11 +71,19 @@ class StreetArtView : AppCompatActivity() {
                     Snackbar.make(binding.root, R.string.enter_placemark_title, Snackbar.LENGTH_LONG)
                         .show()
                 } else {
-                    presenter.doAddOrSave(binding.streetArtTitle.text.toString(), binding.description.text.toString(), binding.artistName.text.toString())
+                    GlobalScope.launch(Dispatchers.IO) {
+                        presenter.doAddOrSave(
+                            binding.streetArtTitle.text.toString(),
+                            binding.description.text.toString(),
+                            binding.artistName.text.toString()
+                        )
+                    }
                 }
             }
             R.id.item_delete -> {
-                presenter.doDelete()
+                GlobalScope.launch(Dispatchers.IO){
+                    presenter.doDelete()
+                }
             }
             R.id.item_cancel -> {
                 presenter.doCancel()
@@ -83,18 +94,18 @@ class StreetArtView : AppCompatActivity() {
     }
 
     fun showPlacemark(streetart: StreetArtModel) {
-        binding.streetArtTitle.setText(placemark.title)
-        binding.description.setText(placemark.description)
+        binding.streetArtTitle.setText(streetart.title)
+        binding.description.setText(streetart.description)
 
         Picasso.get()
-            .load(placemark.image)
+            .load(streetart.image)
             .into(binding.placemarkImage)
 
         if (placemark.image != Uri.EMPTY) {
             binding.chooseImage.setText(R.string.change_placemark_image)
         }
-        binding.lat.setText("%.6f".format(placemark.lat))
-        binding.lng.setText("%.6f".format(placemark.lng))
+        binding.lat.setText("%.6f".format(streetart.lat))
+        binding.lng.setText("%.6f".format(streetart.lng))
 
     }
 

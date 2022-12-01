@@ -2,13 +2,16 @@ package org.wit.streetart.models
 
 import android.net.Uri
 import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class StreetArtModel(var id: Long = 0,
+@Entity
+data class StreetArtModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
                           var title: String = "",
                           var description: String = "",
-                          var artistName: String = "Unknown Artist",
+                          var artistName: String = "",
                           var image: Uri = Uri.EMPTY,
                           var lat : Double = 0.0,
                           var lng: Double = 0.0,

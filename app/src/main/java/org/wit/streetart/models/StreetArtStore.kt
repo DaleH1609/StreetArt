@@ -1,9 +1,9 @@
 package org.wit.streetart.models
 
 interface StreetArtStore {
-    fun findAll(): List<StreetArtModel>
-    fun create(streetart: StreetArtModel)
-    fun update(streetart: StreetArtModel)
-    fun delete(streetart: StreetArtModel)
-    fun findById(id:Long) : StreetArtModel?
+    suspend fun findAll(): List<StreetArtModel>
+    suspend fun create(streetart: StreetArtModel)
+    suspend fun update(streetart: StreetArtModel)
+    suspend fun delete(streetart: StreetArtModel)
+    suspend fun findById(id:Long) : StreetArtModel?
 }

@@ -29,24 +29,24 @@ class StreetArtJSONStore(private val context: Context) : StreetArtStore {
         }
     }
 
-    override fun findAll(): MutableList<StreetArtModel> {
+    override suspend fun findAll(): MutableList<StreetArtModel> {
         logAll()
         return streetArts
     }
 
-    override fun findById(id:Long) : StreetArtModel? {
+    override suspend fun findById(id:Long) : StreetArtModel? {
         val foundPlacemark: StreetArtModel? = streetArts.find { it.id == id }
         return foundPlacemark
     }
 
-    override fun create(streetart: StreetArtModel) {
+    override suspend fun create(streetart: StreetArtModel) {
         streetart.id = generateRandomId()
         streetArts.add(streetart)
         serialize()
     }
 
 
-    override fun update(streetart: StreetArtModel) {
+    override suspend fun update(streetart: StreetArtModel) {
         var foundStreetArt: StreetArtModel? = streetArts.find { p -> p.id == streetart.id }
         if (foundStreetArt != null) {
             foundStreetArt.title = streetart.title
@@ -66,7 +66,7 @@ class StreetArtJSONStore(private val context: Context) : StreetArtStore {
         write(context, JSON_FILE, jsonString)
     }
 
-    override fun delete(placemark: StreetArtModel) {
+    override suspend fun delete(placemark: StreetArtModel) {
         streetArts.remove(placemark)
         serialize()
     }

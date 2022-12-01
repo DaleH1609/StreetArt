@@ -12,22 +12,22 @@ class StreetArtMemStore : StreetArtStore {
 
     val streetarts = ArrayList<StreetArtModel>()
 
-    override fun findAll(): List<StreetArtModel> {
+    override suspend fun findAll(): List<StreetArtModel> {
         return streetarts
     }
 
-    override fun create(streetart: StreetArtModel) {
+    override suspend fun create(streetart: StreetArtModel) {
         streetart.id
         streetarts.add(streetart)
         logAll()
     }
 
-    override fun findById(id:Long) : StreetArtModel? {
+    override suspend fun findById(id:Long) : StreetArtModel? {
         val foundPlacemark: StreetArtModel? = streetarts.find { it.id == id }
         return foundPlacemark
     }
 
-    override fun delete(streetart: StreetArtModel) {
+    override suspend fun delete(streetart: StreetArtModel) {
         streetarts.remove(streetart)
     }
 
@@ -35,7 +35,7 @@ class StreetArtMemStore : StreetArtStore {
         streetarts.forEach { i("${it}") }
     }
 
-    override fun update(streetart: StreetArtModel) {
+    override suspend fun update(streetart: StreetArtModel) {
         var foundStreetArt: StreetArtModel? = streetarts.find { p -> p.id == streetart.id }
         if (foundStreetArt != null) {
             foundStreetArt.title = streetart.title

@@ -59,7 +59,7 @@ class StreetArtPresenter(private val view: StreetArtView){
     }
 
 
-    fun doAddOrSave(title: String, description: String, artistName: String) {
+    suspend fun doAddOrSave(title: String, description: String, artistName: String) {
         streetart.title = title
         streetart.description = description
         streetart.artistName = artistName
@@ -78,7 +78,7 @@ class StreetArtPresenter(private val view: StreetArtView){
 
     }
 
-    fun doDelete() {
+   suspend fun doDelete() {
         app.streetArts.delete(streetart)
         view.finish()
 
