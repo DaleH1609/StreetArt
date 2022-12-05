@@ -52,8 +52,8 @@ class StreetArtPresenter(private val view: StreetArtView){
             if (checkLocationPermissions(view)) {
                 doSetCurrentLocation()
             }
-            streetart.lat = location.lat
-            streetart.lng = location.lng
+            streetart.location.lat = location.lat
+            streetart.location.lng = location.lng
         }
 
     }
@@ -75,13 +75,11 @@ class StreetArtPresenter(private val view: StreetArtView){
 
     fun doCancel() {
         view.finish()
-
     }
 
    suspend fun doDelete() {
         app.streetArts.delete(streetart)
         view.finish()
-
     }
 
     fun doSelectImage() {
@@ -90,11 +88,11 @@ class StreetArtPresenter(private val view: StreetArtView){
 
     fun doSetLocation() {
 
-        if (streetart.zoom != 0f) {
-            location.lat =  streetart.lat
-            location.lng = streetart.lng
-            location.zoom = streetart.zoom
-            locationUpdate(streetart.lat, streetart.lng)
+        if (streetart.location.zoom != 0f) {
+            location.lat =  streetart.location.lat
+            location.lng = streetart.location.lng
+            location.zoom = streetart.location.zoom
+            locationUpdate(streetart.location.lat, streetart.location.lng)
         }
         val launcherIntent = Intent(view, EditLocationView::class.java)
             .putExtra("location", location)
@@ -125,18 +123,16 @@ class StreetArtPresenter(private val view: StreetArtView){
     }
     fun doConfigureMap(m: GoogleMap) {
         map = m
-        locationUpdate(streetart.lat, streetart.lng)
+        locationUpdate(streetart.location.lat, streetart.location.lng)
     }
 
     fun locationUpdate(lat: Double, lng: Double) {
-        streetart.lat = lat
-        streetart.lng = lng
-        streetart.zoom = 15f
+        streetart.location = location
         map?.clear()
         map?.uiSettings?.setZoomControlsEnabled(true)
-        val options = MarkerOptions().title(streetart.title).position(LatLng(streetart.lat, streetart.lng))
+        val options = MarkerOptions().title(streetart.title).position(LatLng(streetart.location.lat, streetart.location.lng))
         map?.addMarker(options)
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(streetart.lat, streetart.lng), streetart.zoom))
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(streetart.location.lat, streetart.location.lng), streetart.location.zoom))
         view.showPlacemark(streetart)
     }
 
@@ -174,9 +170,7 @@ class StreetArtPresenter(private val view: StreetArtView){
                             Timber.i("Got Location ${result.data.toString()}")
                             val location = result.data!!.extras?.getParcelable<Location>("location")!!
                             Timber.i("Location == $location")
-                            streetart.lat = location.lat
-                            streetart.lng = location.lng
-                            streetart.zoom = location.zoom
+                            streetart.location = location
                         } // end of if
                     }
                     AppCompatActivity.RESULT_CANCELED -> { } else -> { }

@@ -104,8 +104,8 @@ class StreetArtView : AppCompatActivity() {
         if (placemark.image != Uri.EMPTY) {
             binding.chooseImage.setText(R.string.change_placemark_image)
         }
-        binding.lat.setText("%.6f".format(streetart.lat))
-        binding.lng.setText("%.6f".format(streetart.lng))
+        binding.lat.setText("%.6f".format(streetart.location.lat))
+        binding.lng.setText("%.6f".format(streetart.location.lng))
 
     }
 

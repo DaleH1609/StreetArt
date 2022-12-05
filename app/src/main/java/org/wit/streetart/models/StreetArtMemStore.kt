@@ -42,9 +42,7 @@ class StreetArtMemStore : StreetArtStore {
             foundStreetArt.description = streetart.description
             foundStreetArt.artistName = streetart.artistName
             foundStreetArt.image = streetart.image
-            foundStreetArt.lat = streetart.lat
-            foundStreetArt.lng = streetart.lng
-            foundStreetArt.zoom = streetart.zoom
+            foundStreetArt.location = streetart.location
             logAll()
         }
     }

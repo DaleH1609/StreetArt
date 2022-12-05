@@ -53,13 +53,11 @@ class StreetArtJSONStore(private val context: Context) : StreetArtStore {
             foundStreetArt.description = streetart.description
             foundStreetArt.artistName = streetart.artistName
             foundStreetArt.image = streetart.image
-            foundStreetArt.lat = streetart.lat
-            foundStreetArt.lng = streetart.lng
-            foundStreetArt.zoom = streetart.zoom
-            serialize()
-            logAll()
+            foundStreetArt.location = streetart.location
         }
+            serialize()
     }
+
 
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(streetArts, listType)

@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import org.wit.streetart.helpers.Converters
 import org.wit.streetart.models.StreetArtModel
 
-@Database(entities = arrayOf(StreetArtModel::class), version = 1,  exportSchema = false)
+@Database(entities = [StreetArtModel::class], version = 2,  exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class Database : RoomDatabase() {
     abstract fun streetartDao(): StreetArtDao

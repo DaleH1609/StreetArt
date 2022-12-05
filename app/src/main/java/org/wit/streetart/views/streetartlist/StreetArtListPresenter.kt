@@ -8,6 +8,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.wit.streetart.main.MainApp
 import org.wit.streetart.models.StreetArtModel
+import org.wit.streetart.views.login.LoginView
 import org.wit.streetart.views.map.PlacemarkMapView
 import org.wit.streetart.views.streetart.StreetArtView
 
@@ -24,6 +25,11 @@ class StreetArtListPresenter(val view: StreetArtListView) {
     }
 
    suspend fun getPlacemarks() = app.streetArts.findAll()
+
+    fun doLogout(){
+        val launcherIntent = Intent(view, LoginView::class.java)
+        editIntentLauncher.launch(launcherIntent)
+    }
 
     fun doAddPlacemark() {
         val launcherIntent = Intent(view, StreetArtView::class.java)

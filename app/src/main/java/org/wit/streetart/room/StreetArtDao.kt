@@ -7,7 +7,7 @@ import org.wit.streetart.models.StreetArtModel
 interface StreetArtDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-   suspend fun create(streetart: StreetArtModel)
+    suspend fun create(streetart: StreetArtModel)
 
     @Query("SELECT * FROM StreetArtModel")
     suspend fun findAll(): List<StreetArtModel>

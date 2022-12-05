@@ -12,6 +12,9 @@
     <string name="select_placemark_image">Select placemark image</string>
     <string name="change_placemark_image">Change placemark image</string>
     <string name="button_location">Set Location</string>
+    <string name="menu_showMap">Show Map</string>
+    <string name="menu_logout">Logout</string>
+    <string name="title_activity_login"> Signup/Login to Placemark</string>
     <string name="title_activity_map">Map</string>
     <string name="hint_artistTitle">Artist Name</string>
     <string name="menu_savePlacemark">Save</string>
