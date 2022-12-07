@@ -10,10 +10,11 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity
 data class StreetArtModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
+                          var fbId: String = "",
                           var title: String = "",
                           var description: String = "",
                           var artistName: String = "",
-                          var image: Uri = Uri.EMPTY,
+                          var image:String = "",
                           @Embedded var location : Location = Location()): Parcelable
 
 @Parcelize

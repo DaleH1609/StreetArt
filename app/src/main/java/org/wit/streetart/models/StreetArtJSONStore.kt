@@ -56,8 +56,12 @@ class StreetArtJSONStore(private val context: Context) : StreetArtStore {
             foundStreetArt.location = streetart.location
         }
             serialize()
+
     }
 
+    override suspend fun clear(){
+        streetArts.clear()
+    }
 
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(streetArts, listType)

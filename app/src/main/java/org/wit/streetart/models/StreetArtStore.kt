@@ -6,4 +6,5 @@ interface StreetArtStore {
     suspend fun update(streetart: StreetArtModel)
     suspend fun delete(streetart: StreetArtModel)
     suspend fun findById(id:Long) : StreetArtModel?
+    suspend fun clear()
 }

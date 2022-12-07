@@ -14,7 +14,7 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        streetArts = StreetArtStoreRoom(applicationContext)
+        streetArts = StreetArtFireStore(applicationContext)
         users = UserJSONStore(applicationContext)
         i("Street Art started")
     }

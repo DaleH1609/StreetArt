@@ -20,6 +20,9 @@ class StreetArtStoreRoom(val context: Context) : StreetArtStore {
         return dao.findAll()
     }
 
+    override suspend fun clear(){
+    }
+
     override suspend fun findById(id: Long): StreetArtModel? {
         return dao.findById(id)
     }

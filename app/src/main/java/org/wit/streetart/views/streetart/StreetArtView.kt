@@ -14,8 +14,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.wit.streetart.R
 import org.wit.streetart.databinding.ActivityStreetartBinding
+import org.wit.streetart.models.Location
 import org.wit.streetart.models.StreetArtModel
 import timber.log.Timber
+import timber.log.Timber.i
 
 class StreetArtView : AppCompatActivity() {
     private lateinit var binding: ActivityStreetartBinding
@@ -94,23 +96,26 @@ class StreetArtView : AppCompatActivity() {
     }
 
     fun showPlacemark(streetart: StreetArtModel) {
-        binding.streetArtTitle.setText(streetart.title)
-        binding.description.setText(streetart.description)
+        if (binding.streetArtTitle.text.isEmpty()) binding.streetArtTitle.setText(streetart.title)
+        if (binding.description.text.isEmpty())  binding.description.setText(streetart.description)
 
-        Picasso.get()
-            .load(streetart.image)
-            .into(binding.placemarkImage)
+        if (streetart.image != "") {
+            Picasso.get()
+                .load(streetart.image)
+                .into(binding.placemarkImage)
 
-        if (placemark.image != Uri.EMPTY) {
+
             binding.chooseImage.setText(R.string.change_placemark_image)
         }
-        binding.lat.setText("%.6f".format(streetart.location.lat))
-        binding.lng.setText("%.6f".format(streetart.location.lng))
-
+        this.showLocation(placemark.location)
+    }
+    private fun showLocation (loc: Location){
+        binding.lat.setText("%.6f".format(loc.lat))
+        binding.lng.setText("%.6f".format(loc.lng))
     }
 
-    fun updateImage(image: Uri){
-        Timber.i("Image updated")
+    fun updateImage(image: String){
+        i("Image updated")
         Picasso.get()
             .load(image)
             .into(binding.placemarkImage)

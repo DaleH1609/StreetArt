@@ -31,6 +31,10 @@ class StreetArtMemStore : StreetArtStore {
         streetarts.remove(streetart)
     }
 
+    override suspend fun clear(){
+        streetarts.clear()
+    }
+
     fun logAll() {
         streetarts.forEach { i("${it}") }
     }

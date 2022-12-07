@@ -150,7 +150,7 @@ class StreetArtPresenter(private val view: StreetArtView){
                     AppCompatActivity.RESULT_OK -> {
                         if (result.data != null) {
                             Timber.i("Got Result ${result.data!!.data}")
-                            streetart.image = result.data!!.data!!
+                            streetart.image = result.data!!.data!!.toString()
                             view.updateImage(streetart.image)
                         }
                     }
