@@ -38,7 +38,7 @@ class StreetArtListPresenter(val view: StreetArtListView) {
 
     fun doEditPlacemark(streetart: StreetArtModel) {
         val launcherIntent = Intent(view, StreetArtView::class.java)
-        launcherIntent.putExtra("placemark_edit", streetart)
+        launcherIntent.putExtra("streetart_edit", streetart)
         editIntentLauncher.launch(launcherIntent)
     }
 

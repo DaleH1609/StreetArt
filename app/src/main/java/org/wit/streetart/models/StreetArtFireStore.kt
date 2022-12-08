@@ -77,7 +77,7 @@ class StreetArtFireStore(val context: Context) : StreetArtStore {
         }
         userId = FirebaseAuth.getInstance().currentUser!!.uid
         st = FirebaseStorage.getInstance().reference
-        db = FirebaseDatabase.getInstance("https://streetart-e24c4-default-rtdb.europe-west1.firebasedatabase.app").reference
+        db = FirebaseDatabase.getInstance("https://streetart-d49d5-default-rtdb.firebaseio.com").reference
         streetarts.clear()
         db.child("users").child(userId).child("streetarts")
             .addListenerForSingleValueEvent(valueEventListener)

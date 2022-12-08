@@ -10,8 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.wit.streetart.R
-import org.wit.streetart.adapters.StreetArtAdapter
-import org.wit.streetart.adapters.StreetArtListener
 import org.wit.streetart.databinding.ActivityStreetArtListBinding
 import org.wit.streetart.main.MainApp
 import org.wit.streetart.models.StreetArtModel
@@ -35,12 +33,12 @@ class StreetArtListView :  AppCompatActivity(), StreetArtListener {
         presenter = StreetArtListPresenter(this)
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
+        updateRecyclerView()
 
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
             binding.toolbar.title = "${title}: ${user.email}"
         }
-        updateRecyclerView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,19 +48,25 @@ class StreetArtListView :  AppCompatActivity(), StreetArtListener {
 
     override fun onResume() {
         //update the view
+        super.onResume()
+        updateRecyclerView()
         binding.recyclerView.adapter?.notifyDataSetChanged()
         Timber.i("recyclerView onResume")
-        super.onResume()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.item_add -> presenter.doAddPlacemark()
             R.id.item_map -> presenter.doShowPlacemarksMap()
-            R.id.item_logout -> { presenter.doLogout() }
+            R.id.item_logout -> {
+                GlobalScope.launch(Dispatchers.IO) {
+                    presenter.doLogout()
+                }
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     override fun onStreetArtClick(streetart: StreetArtModel) {
         presenter.doEditPlacemark(streetart)
