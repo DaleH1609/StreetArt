@@ -68,8 +68,8 @@ class StreetArtJSONStore(private val context: Context) : StreetArtStore {
         write(context, JSON_FILE, jsonString)
     }
 
-    override suspend fun delete(placemark: StreetArtModel) {
-        streetArts.remove(placemark)
+    override suspend fun delete(streetart: StreetArtModel) {
+        streetArts.remove(streetart)
         serialize()
     }
 

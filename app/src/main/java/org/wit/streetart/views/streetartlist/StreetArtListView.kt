@@ -29,6 +29,7 @@ class StreetArtListView :  AppCompatActivity(), StreetArtListener {
         super.onCreate(savedInstanceState)
         binding = ActivityStreetArtListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
         presenter = StreetArtListPresenter(this)
@@ -40,7 +41,6 @@ class StreetArtListView :  AppCompatActivity(), StreetArtListener {
             binding.toolbar.title = "${title}: ${user.email}"
         }
         updateRecyclerView()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -28,7 +28,7 @@ class StreetArtPresenter(private val view: StreetArtView){
     var map: GoogleMap? = null
     var streetart = StreetArtModel()
     var app: MainApp = view.application as MainApp
-    //location service
+    var locationManualyChanged = false;
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
@@ -87,6 +87,7 @@ class StreetArtPresenter(private val view: StreetArtView){
     }
 
     fun doSetLocation() {
+        locationManualyChanged = true;
 
         if (streetart.location.zoom != 0f) {
             location.lat =  streetart.location.lat
@@ -113,7 +114,9 @@ class StreetArtPresenter(private val view: StreetArtView){
             override fun onLocationResult(locationResult: LocationResult?) {
                 if (locationResult != null && locationResult.locations != null) {
                     val l = locationResult.locations.last()
-                    locationUpdate(l.latitude, l.longitude)
+                    if (!locationManualyChanged) {
+                        locationUpdate(l.latitude, l.longitude)
+                    }
                 }
             }
         }

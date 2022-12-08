@@ -1,14 +1,21 @@
 package org.wit.streetart.models
 
 import android.content.Context
+import android.graphics.Bitmap
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import org.wit.streetart.helpers.readImageFromPath
+import timber.log.Timber
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 class StreetArtFireStore(val context: Context) : StreetArtStore {
     val streetarts = ArrayList<StreetArtModel>()
     lateinit var userId: String
     lateinit var db: DatabaseReference
-
+    lateinit var st: StorageReference
     override suspend fun findAll(): List<StreetArtModel> {
         return streetarts
     }
@@ -24,6 +31,7 @@ class StreetArtFireStore(val context: Context) : StreetArtStore {
             streetart.fbId = key
             streetarts.add(streetart)
             db.child("users").child(userId).child("streetarts").child(key).setValue(streetart)
+            updateImage(streetart)
         }
     }
 
@@ -38,6 +46,9 @@ class StreetArtFireStore(val context: Context) : StreetArtStore {
         }
 
         db.child("users").child(userId).child("streetarts").child(streetart.fbId).setValue(streetart)
+        if(streetart.image.length > 0){
+            updateImage(streetart)
+        }
 
     }
 
@@ -65,9 +76,38 @@ class StreetArtFireStore(val context: Context) : StreetArtStore {
             }
         }
         userId = FirebaseAuth.getInstance().currentUser!!.uid
+        st = FirebaseStorage.getInstance().reference
         db = FirebaseDatabase.getInstance("https://streetart-e24c4-default-rtdb.europe-west1.firebasedatabase.app").reference
         streetarts.clear()
         db.child("users").child(userId).child("streetarts")
             .addListenerForSingleValueEvent(valueEventListener)
+    }
+
+    fun updateImage(streetart: StreetArtModel) {
+        if (streetart.image != "") {
+            val fileName = File(streetart.image)
+            val imageName = fileName.getName()
+
+            var imageRef = st.child(userId + '/' + imageName)
+            val baos = ByteArrayOutputStream()
+            val bitmap = readImageFromPath(context, streetart.image)
+
+            bitmap?.let {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+                val uploadTask = imageRef.putBytes(data)
+                uploadTask.addOnFailureListener {
+                    println(it.message)
+                }.addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                        streetart.image = it.toString()
+                        db.child("users").child(userId).child("streetart").child(streetart.fbId).setValue(streetart)
+                    }
+                }.addOnFailureListener{
+                    var errorMessage = it.message
+                    Timber.i("Failure: $errorMessage")
+                }
+            }
+        }
     }
 }

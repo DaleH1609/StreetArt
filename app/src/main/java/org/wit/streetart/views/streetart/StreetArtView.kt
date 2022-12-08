@@ -99,6 +99,7 @@ class StreetArtView : AppCompatActivity() {
         if (binding.streetArtTitle.text.isEmpty()) binding.streetArtTitle.setText(streetart.title)
         if (binding.description.text.isEmpty())  binding.description.setText(streetart.description)
 
+
         if (streetart.image != "") {
             Picasso.get()
                 .load(streetart.image)
@@ -107,7 +108,7 @@ class StreetArtView : AppCompatActivity() {
 
             binding.chooseImage.setText(R.string.change_placemark_image)
         }
-        this.showLocation(placemark.location)
+        this.showLocation(streetart.location)
     }
     private fun showLocation (loc: Location){
         binding.lat.setText("%.6f".format(loc.lat))

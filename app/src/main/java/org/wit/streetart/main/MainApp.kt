@@ -9,13 +9,11 @@ import timber.log.Timber.i
 class MainApp : Application() {
 
     lateinit var streetArts: StreetArtStore
-    lateinit var users: UserStore
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         streetArts = StreetArtFireStore(applicationContext)
-        users = UserJSONStore(applicationContext)
         i("Street Art started")
     }
 }

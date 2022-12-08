@@ -50,14 +50,18 @@ class LoginPresenter (val view: LoginView)  {
         view.showProgress()
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view) { task ->
             if (task.isSuccessful) {
-                val launcherIntent = Intent(view, StreetArtListView::class.java)
-                loginIntentLauncher.launch(launcherIntent)
+                fireStore!!.fetchStreetArts {
+                    view?.hideProgress()
+                    val launcherIntent = Intent(view, StreetArtListView::class.java)
+                    loginIntentLauncher.launch(launcherIntent)
+                }
             } else {
                 view.showSnackBar("Login failed: ${task.exception?.message}")
             }
             view.hideProgress()
         }
     }
+
     private fun registerLoginCallback(){
         loginIntentLauncher =
             view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
