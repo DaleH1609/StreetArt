@@ -3,6 +3,7 @@ package org.wit.streetart.views.streetartlist
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -17,7 +18,6 @@ class StreetArtListPresenter(val view: StreetArtListView) {
     var app: MainApp = view.application as MainApp
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var editIntentLauncher : ActivityResultLauncher<Intent>
-    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 
     init {
         registerEditCallback()
@@ -26,9 +26,11 @@ class StreetArtListPresenter(val view: StreetArtListView) {
 
    suspend fun getPlacemarks() = app.streetArts.findAll()
 
-    fun doLogout(){
+    suspend fun doLogout(){
+        FirebaseAuth.getInstance().signOut()
         val launcherIntent = Intent(view, LoginView::class.java)
         editIntentLauncher.launch(launcherIntent)
+        app.streetArts.clear()
     }
 
     fun doAddPlacemark() {

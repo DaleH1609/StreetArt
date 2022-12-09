@@ -23,7 +23,7 @@ class StreetArtView : AppCompatActivity() {
     private lateinit var binding: ActivityStreetartBinding
     private lateinit var presenter: StreetArtPresenter
     lateinit var map: GoogleMap
-    var placemark = StreetArtModel()
+    var streetart = StreetArtModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,6 +98,7 @@ class StreetArtView : AppCompatActivity() {
     fun showPlacemark(streetart: StreetArtModel) {
         if (binding.streetArtTitle.text.isEmpty()) binding.streetArtTitle.setText(streetart.title)
         if (binding.description.text.isEmpty())  binding.description.setText(streetart.description)
+        if (binding.artistName.text.isEmpty())  binding.artistName.setText(streetart.artistName)
 
 
         if (streetart.image != "") {

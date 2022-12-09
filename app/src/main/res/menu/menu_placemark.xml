@@ -10,15 +10,15 @@
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/item_save"
-        android:title="@string/menu_savePlacemark"
-        android:icon="@android:drawable/ic_menu_save"
-        app:showAsAction="always"/>
-
-    <item
         android:id="@+id/item_delete"
         android:title="@string/menu_deletePlacemark"
         android:icon="@android:drawable/ic_menu_delete"
         android:fontFamily="@font/alfa_slab_one"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/item_save"
+        android:title="@string/menu_savePlacemark"
+        android:icon="@android:drawable/ic_menu_save"
         app:showAsAction="always"/>
 </menu>
