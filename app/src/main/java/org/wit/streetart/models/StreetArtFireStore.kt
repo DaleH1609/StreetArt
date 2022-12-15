@@ -101,7 +101,7 @@ class StreetArtFireStore(val context: Context) : StreetArtStore {
                 }.addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
                         streetart.image = it.toString()
-                        db.child("users").child(userId).child("streetart").child(streetart.fbId).setValue(streetart)
+                        db.child("users").child(userId).child("streetarts").child(streetart.fbId).setValue(streetart)
                     }
                 }.addOnFailureListener{
                     var errorMessage = it.message
