@@ -30,7 +30,7 @@
             android:theme="@style/Theme.StreetArt.NoActionBar" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDl8BtlrvvDSIOO2DW1FghDGpyCwGFZ5OU" />
+            android:value="@string/google_maps_key" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

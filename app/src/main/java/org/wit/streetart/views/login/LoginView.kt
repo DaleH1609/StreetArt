@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+import org.wit.streetart.R
 import org.wit.streetart.databinding.ActivityLoginBinding
 
 class LoginView : AppCompatActivity(){

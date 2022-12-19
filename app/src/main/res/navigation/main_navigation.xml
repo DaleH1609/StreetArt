@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/streetArtListView">
+
+    <activity
+        android:id="@+id/streetArtListView"
+        android:name="org.wit.streetart.views.streetartlist.StreetArtListView"
+        android:label="activity_street_art_list"
+        tools:layout="@layout/activity_street_art_list" />
+    <activity
+        android:id="@+id/streetArtView"
+        android:name="org.wit.streetart.views.streetart.StreetArtView"
+        android:label="activity_streetart"
+        tools:layout="@layout/activity_streetart" />
+</navigation>
