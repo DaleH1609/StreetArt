@@ -38,6 +38,7 @@ class StreetArtAdapter constructor(
             binding.streetArtTitle.text = streetart.title
             binding.description.text = streetart.description
             binding.artistName.text = streetart.artistName
+            binding.rating.text = streetart.rating.toString()
             if (streetart.image != ""){
                 Picasso.get()
                     .load(streetart.image)

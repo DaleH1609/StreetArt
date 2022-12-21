@@ -2,6 +2,7 @@ package org.wit.streetart.views.streetart
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.widget.RatingBar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -59,10 +60,11 @@ class StreetArtPresenter(private val view: StreetArtView){
     }
 
 
-    suspend fun doAddOrSave(title: String, description: String, artistName: String) {
+    suspend fun doAddOrSave(title: String, description: String, artistName: String, ratingBar: Float) {
         streetart.title = title
         streetart.description = description
         streetart.artistName = artistName
+        streetart.rating = ratingBar
         if (edit) {
             app.streetArts.update(streetart)
         } else {
@@ -139,9 +141,11 @@ class StreetArtPresenter(private val view: StreetArtView){
         view.showPlacemark(streetart)
     }
 
-    fun cachePlacemark (title: String, description: String) {
+    fun cachePlacemark (title: String, description: String, artistName: String, ratingBar: Float) {
         streetart.title = title;
         streetart.description = description
+        streetart.artistName = artistName
+        streetart.rating = ratingBar
     }
 
     private fun registerImagePickerCallback() {

@@ -36,12 +36,12 @@ class StreetArtView : AppCompatActivity() {
         presenter = StreetArtPresenter(this)
 
         binding.chooseImage.setOnClickListener {
-            presenter.cachePlacemark(binding.streetArtTitle.text.toString(), binding.description.text.toString())
+            presenter.cachePlacemark(binding.streetArtTitle.text.toString(), binding.description.text.toString(), binding.artistName.text.toString(), binding.ratingBar.rating)
             presenter.doSelectImage()
         }
 
         binding.mapView2.setOnClickListener {
-            presenter.cachePlacemark(binding.streetArtTitle.text.toString(), binding.description.text.toString())
+            presenter.cachePlacemark(binding.streetArtTitle.text.toString(), binding.description.text.toString(), binding.artistName.text.toString(), binding.ratingBar.rating)
             presenter.doSetLocation()
         }
 
@@ -77,7 +77,8 @@ class StreetArtView : AppCompatActivity() {
                         presenter.doAddOrSave(
                             binding.streetArtTitle.text.toString(),
                             binding.description.text.toString(),
-                            binding.artistName.text.toString()
+                            binding.artistName.text.toString(),
+                            binding.ratingBar.rating
                         )
                     }
                 }
@@ -99,6 +100,7 @@ class StreetArtView : AppCompatActivity() {
         if (binding.streetArtTitle.text.isEmpty()) binding.streetArtTitle.setText(streetart.title)
         if (binding.description.text.isEmpty())  binding.description.setText(streetart.description)
         if (binding.artistName.text.isEmpty())  binding.artistName.setText(streetart.artistName)
+        binding.ratingBar.setRating(streetart.rating)
 
 
         if (streetart.image != "") {

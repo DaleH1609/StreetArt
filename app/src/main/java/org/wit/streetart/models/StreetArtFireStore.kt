@@ -41,6 +41,7 @@ class StreetArtFireStore(val context: Context) : StreetArtStore {
             foundStreetArt.title = streetart.title
             foundStreetArt.description = streetart.description
             foundStreetArt.artistName = streetart.artistName
+            foundStreetArt.rating = streetart.rating
             foundStreetArt.image = streetart.image
             foundStreetArt.location = streetart.location
         }

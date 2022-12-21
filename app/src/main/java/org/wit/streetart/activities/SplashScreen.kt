@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import org.wit.streetart.R
+import org.wit.streetart.views.login.LoginView
 import org.wit.streetart.views.streetart.StreetArtView
 import org.wit.streetart.views.streetartlist.StreetArtListView
 
@@ -18,7 +19,7 @@ class SplashScreen : AppCompatActivity() {
 
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
-            val intent = Intent(this@SplashScreen, StreetArtListView::class.java)
+            val intent = Intent(this@SplashScreen, LoginView::class.java)
             startActivity(intent)
             finish()
         }, 3000)
